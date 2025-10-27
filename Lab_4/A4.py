@@ -1,0 +1,42 @@
+def isValidNumber(string):
+    return string.isdigit() and len(string) in [13, 15, 16]
+
+
+def getCheckSum(string):
+    checkSum = 0
+    for i in reversed(range(0, len(string) - 1, 2)):
+        num = int(string[i]) * 2
+        if num > 9:
+            checkSum += 1 + num - 10
+        else:
+            checkSum += num
+
+    for i in reversed(range(1, len(string) + 1, 2)):
+        checkSum += int(string[i])
+
+    return checkSum
+
+
+def getCardType(string):
+    if (len(string) == 13 or len(string) == 16) and string.startswith("4"):
+        return "Visa"
+    if len(string) == 15 and (string.startswith("34") or string.startswith("37")):
+        return "American Express"
+    if len(string) == 16 and string[0] == '5' and string[1] in '12345':
+        return "Master Card"
+    return "Invalid"
+
+
+def main():
+    cardNumber = input("Введите номер банковской карты: ")
+    if isValidNumber(cardNumber):
+        if getCheckSum(cardNumber) % 10 == 0:
+            print(getCardType(cardNumber))
+        else:
+            print("Invalid")
+    else:
+        print("Invalid")
+
+
+if __name__ == "__main__":
+    main()
