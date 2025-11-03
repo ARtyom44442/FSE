@@ -4,12 +4,12 @@ def isValidNumber(string):
 
 def getCheckSum(string):
     checkSum = 0
-    for i in range(len(string) - 2, -1, -2):
+    for i in reversed(range(0, len(string) - 1, 2)):
         if int(string[i]) * 2 > 9:
             checkSum = checkSum + 1 + int(string[i]) * 2 - 10
         else:
             checkSum = checkSum + int(string[i]) * 2
-    for i in range(len(string) - 1, -1, -2):
+    for i in reversed(range(1, len(string), 2)):
         checkSum += int(string[i])
     return checkSum
 
