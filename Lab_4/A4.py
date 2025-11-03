@@ -15,7 +15,7 @@ def getCheckSum(string):
 
 
 def getCardType(string):
-    if (len(string) == 13 or len(string) == 16) and string.startswith("4"):
+    if (len(string) == 13 or len(string) == 16 ) and string.startswith("4"):
         return "Visa"
     if len(string) == 15 and (string.startswith("34") or string.startswith("37")):
         return "American Express"
@@ -35,5 +35,4 @@ def main():
         print("Invalid")
 
 
-if __name__ == "__main__":
-    main()
+main()
