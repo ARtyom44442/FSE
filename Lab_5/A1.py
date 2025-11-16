@@ -2,8 +2,10 @@ text = 'Падал (куда он там падал) прошлогодний (�
 print(text)
 
 for i in text:
-    position1 = text.rfind('(')
-    position2 = text.rfind(')')
+    position1 = text.find('(')
+    position2 = text.find(')')
     text = text.replace(text[position1:position2 + 1], '')
+    text = text.replace("  ", " ") and text.replace(" .", ".")
+
 
 print(text)
