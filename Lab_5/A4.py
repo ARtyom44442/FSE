@@ -34,3 +34,20 @@ def diff(first_chain, second_chain):
             difference_count += 1
 
     return difference_count
+
+
+def mode(chain):
+    decoded_chain = decode_rle(chain)
+    replay = {}
+
+    for char in decoded_chain:
+        replay[char] = replay.get(char, 0) + 1
+    max_char = None
+    max_count = -1
+
+    for char, count in replay.items():
+        if count > max_count:
+            max_char = char
+            max_count = count
+
+    print(max_char, "\t\t\t", max_count)
