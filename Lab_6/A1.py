@@ -30,7 +30,7 @@ def load_workouts_data():
             if workout_type == 'силовая тренировка':
                 workout_distance = 0
             else:
-                workout_distance = int(workout_elem.find('distance').text)
+                workout_distance = float(workout_elem.find('distance').text)
             workout = {
                 'workout_id': int(workout_elem.find('workout_id').text),
                 'user_id': int(workout_elem.find('user_id').text),
@@ -38,10 +38,9 @@ def load_workouts_data():
                 'type': workout_elem.find('type').text,
                 'duration': int(workout_elem.find('duration').text),
                 'distance': workout_distance,
-
-
-
-
+                'calories': int(workout_elem.find('calories').text),
+                'avg_heart_rate': int(workout_elem.find('avg_heart_rate').text),
+                'intensity': workout_elem.find('intensity').text,
             }
             workouts.append(workout)
         return workouts
@@ -50,5 +49,26 @@ def load_workouts_data():
         return []
 
 
+def get_stats(users, workouts):
+    try:
+        total_workouts = len(workouts)
+        all_users = len(users)
+        total_calories = sum(workout['calories'] for workout in workouts)
+        all_time = sum(workout['duration'] for workout in workouts)/60
+        total_distance = sum(workout['distance'] for workout in workouts)
+        result = f"""ОБЩАЯ СТАТИСТИКА
+===========================
+Всего тренировок: {total_workouts}
+Всего пользователей: {all_users}
+Общее количество калорий: {total_calories}
+Общее время тренировок (часы): {all_time:.1f}
+Общее расстояние: {total_distance}"""
+        return result
+    except FileNotFoundError:
+        print("Не найдено")
+        return []
 
-print(load_workouts_data())
+
+print(get_stats(load_users_data(), load_workouts_data()))
+
+
