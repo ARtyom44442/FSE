@@ -49,8 +49,8 @@ with open('genedata.0.txt', 'w', encoding='utf-8') as f:
 
         difference_count = abs(len(decoded_first) - len(decoded_second))
 
-        max_len = min(len(decoded_first), len(decoded_second))
-        for i in range(max_len):
+        min_len = min(len(decoded_first), len(decoded_second))
+        for i in range(min_len):
             if decoded_first[i] != decoded_second[i]:
                 difference_count += 1
 
